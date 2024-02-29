@@ -7,9 +7,12 @@ const inputDirectory = "input_directory/";
 const outputDirectory = "output_directory/";
 const openai = new OpenAI();
 let dir = `./${inputFile.split(".")[0]}_output/`;
-if (!fs.existsSync(dir)) {
-  fs.mkdirSync(dir);
-}
+
+//create required directories if they don't exist
+createDir(inputDirectory);
+createDir(outputDirectory);
+createDir(dir);
+
 let promptForGPT = `Create a JSON array showcasing 5-6 captivating moments from a YouTube video. Each segment should span between 10 to 15 seconds, amalgamating at least 2-3 timestamps to ensure ample duration.
 While merging, it's possible for highlights to commence mid-sentence or conclude abruptly; hence, include sufficient context to maintain coherence.
 Ensure each highlight stands independently without relying on others.
@@ -159,9 +162,18 @@ function extractClip(inputFile, outputFile, startTime, endTime) {
       .run();
   });
 }
+
+//create dir function
+function createDir(dirName) {
+  if (!fs.existsSync(dirName)) {
+    fs.mkdirSync(dirName);
+  }
+}
+
 main();
 
 // Example timeranges Without extracting transcriptions
+
 // const timeRanges = [
 //   { start: "00.000", end: "16.840" },
 //   { start: "117.060", end: "134.900" },
