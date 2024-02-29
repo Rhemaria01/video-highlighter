@@ -1,0 +1,7 @@
+.env
+input_directory
+output_directory
+video_05_output
+node_modules
+prompt.js
+prompt.txt
